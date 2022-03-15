@@ -29,7 +29,7 @@ do
 done
 
 # set retain varible
-if [[ "$retain_in" != 28 ]]; then
+if [[ "$retain_in" != "28" ]]; then
   echo "Set default 28 days"
   retain=28
 else
