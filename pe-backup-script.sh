@@ -32,7 +32,7 @@ echo $path
 echo $retain_in
 
 # set retain varible
-if [[ -z $retain_in ]; then
+if [ -z $retain_in ]; then
   echo "Set default 28 days"
   retain=28
 else
