@@ -20,8 +20,16 @@ fi
 
 timestamp=`date +%Y-%m-%d_%H.%M.%S`
 
+while getopts path:retain: flag
+do
+    case "${flag}" in
+        path) path=${OPTARG};;
+        retain) retain_in=${OPTARG};;
+    esac
+done
+
 # set retain varible
-if [ -z $2 ]; then
+if [ -z $retain ]; then
   echo "Set default 28 days"
   retain=28
 else
@@ -39,15 +47,15 @@ cleanup_fn () {
 }
 
 # perform backup
-if [ -z $1 ]; then
+if [ -z $path ]; then
   echo "Using default backup location /var/puppetlabs/backups"
-  /opt/puppetlabs/bin/puppet-backup create
-  tar -cf /var/puppetlabs/backups/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
+  #/opt/puppetlabs/bin/puppet-backup create
+  #tar -cf /var/puppetlabs/backups/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
   # clean up old backups
   cleanup_fn "/var/puppetlabs/backups" $2
 else
-  echo "Using $1 as backup location"
-  /opt/puppetlabs/bin/puppet-backup create $1
-  tar -cf $1/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
-  cleanup_fn $1 $2
+  echo "Using $path as backup location"
+  #/opt/puppetlabs/bin/puppet-backup create --dir==$path
+  #tar -cf $path/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
+  cleanup_fn $path $retain
 fi
