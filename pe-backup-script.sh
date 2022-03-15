@@ -20,13 +20,16 @@ fi
 
 timestamp=`date +%Y-%m-%d_%H.%M.%S`
 
-while getopts path:retain: flag
+while getopts p:r: flag
 do
     case "${flag}" in
-        path) path=${OPTARG};;
-        retain) retain_in=${OPTARG};;
+        p) path=${OPTARG};;
+        r) retain_in=${OPTARG};;
     esac
 done
+
+echo $path
+echo $retain_in
 
 # set retain varible
 if [[ "$retain_in" != "28" ]]; then
