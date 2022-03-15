@@ -52,7 +52,7 @@ if [ -z $path ]; then
   #/opt/puppetlabs/bin/puppet-backup create
   #tar -cf /var/puppetlabs/backups/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
   # clean up old backups
-  cleanup_fn "/var/puppetlabs/backups" $2
+  cleanup_fn "/var/puppetlabs/backups" $retain
 else
   echo "Using $path as backup location"
   #/opt/puppetlabs/bin/puppet-backup create --dir==$path
