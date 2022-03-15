@@ -30,7 +30,7 @@ done
 
 # set retain varible
 if [ -z $retain_in ]; then
-  echo "Set default 28 days"
+  echo "Seting default retention of 28 days"
   retain=28
 else
   echo "Retain backups for $retain_in"
