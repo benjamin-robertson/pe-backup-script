@@ -10,11 +10,11 @@ if [[ "$1" == "-h" ]]; then
   echo "------------------------------"
   echo "By default backups PE to /var/puppetlabs/backup and retains backups for 28 days"
   echo ""
-  echo "Argument 1 set backup directory"
-  echo "Argument 2 set numnber of days to retain backup"
+  echo "-p set backup directory"
+  echo "-r set numnber of days to retain backup"
   echo ""
   echo "For example to backup to /root/backup and 7 days retention"
-  echo "./pe-backup-script.sh /root/backup 7"
+  echo "./pe-backup-script.sh -p /root/backup -r 7"
   exit
 fi
 
@@ -32,11 +32,12 @@ echo $path
 echo $retain_in
 
 # set retain varible
-if [[ "$retain_in" != "28" ]]; then
+if [[ "$retain_in" == "28" ]]; then
   echo "Set default 28 days"
   retain=28
 else
-  retain=$2
+  echo "Retain backups for $retain_in"
+  retain=$retain_in
 fi
 
 # clean up old backup fuction
