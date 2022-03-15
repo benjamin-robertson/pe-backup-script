@@ -28,9 +28,6 @@ do
     esac
 done
 
-echo $path
-echo $retain_in
-
 # set retain varible
 if [ -z $retain_in ]; then
   echo "Set default 28 days"
@@ -53,13 +50,14 @@ cleanup_fn () {
 # perform backup
 if [ -z $path ]; then
   echo "Using default backup location /var/puppetlabs/backups"
-  #/opt/puppetlabs/bin/puppet-backup create
-  #tar -cf /var/puppetlabs/backups/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
+  /opt/puppetlabs/bin/puppet-backup create
+  tar -cf /var/puppetlabs/backups/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
   # clean up old backups
   cleanup_fn "/var/puppetlabs/backups" $retain
 else
   echo "Using $path as backup location"
-  #/opt/puppetlabs/bin/puppet-backup create --dir==$path
-  #tar -cf $path/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
+  /opt/puppetlabs/bin/puppet-backup create --dir==$path
+  tar -cf $path/secrets-$timestamp.tar /etc/puppetlabs/orchestration-services/conf.d/secrets/
+  # clean up old backups
   cleanup_fn $path $retain
 fi
